@@ -1,4 +1,15 @@
 [tools]
+# runtimes
 node = '20'
 python = '3.10.12'
+rust = 'latest'
+java = 'temurin-8'
+go = 'latest'
+# tools
 neovim = 'latest'
+github-cli = 'latest'
+bat = 'latest'
+eza = 'latest'
+aws-cli = 'latest'
+
+
