@@ -32,13 +32,9 @@ zinit light-mode for \
 
 # --------------------------- Start p10k ---------------------------
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+zinit ice depth"1"
+zinit light romkatv/powerlevel10k
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
 # ---------------------- Initialize Mise ---------------------------
-zinit as="command" lucid from="gh-r" for \
-    id-as="mise" mv="mise* -> mise" \
-    atclone="./mise* completion zsh > _mise" \
-    atpull="%atclone" \
-    atload='eval "$(mise activate zsh)"' \
-    jdx/mise
+eval "$(~/.local/bin/mise activate zsh)"
