@@ -53,7 +53,6 @@ zinit as="command" lucid from="gh-r" for \
 
 # ---------------------- Initialize Enhancd ---------------------------
 zinit light zsh-users/zsh-syntax-highlighting
-autoload -U compinit; compinit
+zinit light changyuheng/zsh-interactive-cd
 zinit light b4b4r07/enhancd
-zinit light Aloxaf/fzf-tab
 zinit light "MichaelAquilina/zsh-you-should-use"
