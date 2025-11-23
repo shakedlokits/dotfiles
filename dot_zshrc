@@ -52,16 +52,8 @@ zinit as="command" lucid from="gh-r" for \
 # eval "$(~/.local/bin/mise activate zsh)"
 
 # ---------------------- Initialize Enhancd ---------------------------
+zinit light zsh-users/zsh-syntax-highlighting
+autoload -U compinit; compinit
 zinit light b4b4r07/enhancd
-
-# zinit pack="bgn-binary+keys" for fzf
-# zinit light Aloxaf/fzf-tab
-# zstyle ':completion:*:git-checkout:*' sort false
-# # set descriptions format to enable group support
-# zstyle ':completion:*:descriptions' format '[%d]'
-# # set list-colors to enable filename colorizing
-# zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# # preview directory's content with exa when completing cd
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# # switch group using `,` and `.`
-# zstyle ':fzf-tab:*' switch-group ',' '.'
+zinit light Aloxaf/fzf-tab
+zinit light "MichaelAquilina/zsh-you-should-use"
