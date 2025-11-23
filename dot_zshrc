@@ -51,12 +51,8 @@ zinit as="command" lucid from="gh-r" for \
     jdx/mise
 # eval "$(~/.local/bin/mise activate zsh)"
 
-# ---------------------- Initialize Zoxide ---------------------------
-# zoxide from GitHub Releases, managed by zinit
-zinit ice wait"1" lucid as"command" from"gh-r" mv"zoxide* -> zoxide" pick"zoxide/zoxide" \
-  atload'eval "$(zoxide init --cmd cd zsh)"'
-zinit light ajeetdsouza/zoxide
-
+# ---------------------- Initialize Enhancd ---------------------------
+zinit light enhancd/enhancd
 
 
 
