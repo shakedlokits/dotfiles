@@ -51,8 +51,12 @@ zinit as="command" lucid from="gh-r" for \
     jdx/mise
 # eval "$(~/.local/bin/mise activate zsh)"
 
-# ---------------------- Initialize Enhancd ---------------------------
+# ------------------ Initialize Completion -------------------------
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light changyuheng/zsh-interactive-cd
 zinit light b4b4r07/enhancd
 zinit light "MichaelAquilina/zsh-you-should-use"
+ 
+# --------------------- Initialize Aliases -------------------------
+alias ls="eza -alhUGg --git"
+alias cat=bat 
