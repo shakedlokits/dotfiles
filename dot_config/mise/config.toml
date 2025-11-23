@@ -8,6 +8,7 @@ go = 'latest'
 # tools
 neovim = 'latest'
 github-cli = 'latest'
+# commandline tools
 bat = 'latest'
 eza = 'latest'
 aws-cli = 'latest'
