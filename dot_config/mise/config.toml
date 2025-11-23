@@ -11,5 +11,6 @@ github-cli = 'latest'
 bat = 'latest'
 eza = 'latest'
 aws-cli = 'latest'
-
-
+yazi = 'latest'
+zoxide = 'latest'
+fd = 'latest'
