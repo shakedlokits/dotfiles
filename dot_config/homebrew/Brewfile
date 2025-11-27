@@ -1,0 +1,9 @@
+# This Brewfile runs all of brewfiles directory
+
+brewfile_dir = File.expand_path("./brewfiles/")
+
+Dir.glob("#{brewfile_dir}/*.rb").sort.each do |file|
+  puts "Loading sub-Brewfile: #{File.basename(file)}"
+  instance_eval File.read(file), file
+end
+
