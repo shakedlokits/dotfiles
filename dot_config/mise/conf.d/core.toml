@@ -1,0 +1,27 @@
+[tools]
+
+# -- [[ Runtimes ]]
+node = '20'
+python = '3.10.12'
+rust = 'latest'
+java = 'temurin-8'
+go = 'latest'
+
+# -- [[ Tools ]]
+neovim = 'latest'
+github-cli = 'latest'
+act = "latest"
+helm = "latest"
+helmfile = "latest"
+yarn = "latest"
+imagemagick = "latest"
+kubectl = "latest"
+
+# -- [[ CLI Tools ]]
+bat = 'latest'
+eza = 'latest'
+aws-cli = 'latest'
+fzf = 'latest'
+jq = "latest"
+yq = "latest"
+ast-grep = "latest"

@@ -1,0 +1,16 @@
+[tools]
+
+# -- [[ Runtimes ]]
+scala = "latest"
+
+# -- [[ Tools ]]
+sbt = "latest"
+atlas = "latest"
+buf = "latest"
+terraform = "latest"
+localstack = "latest"
+mirrord = "latest"
+minikube = "latest"
+
+# -- [[ CLI Tools ]]
+mark = "latest"
