@@ -6,8 +6,10 @@
 #    Add to this file general settings and misc.
 
 # Set locales
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  export LC_ALL=en_US.UTF-8
+  export LANG=en_US.UTF-8
+fi
 
 # Set history
 HISTFILE="$HOME/.zsh_history"

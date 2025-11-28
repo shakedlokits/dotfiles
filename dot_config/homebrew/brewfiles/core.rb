@@ -4,6 +4,8 @@ brew "exercism"
 brew "uv"
 brew "luarocks"
 brew "sevenzip"
+brew "pcre2"
+brew "less"
 
 cask "ngrok" if OS.mac?
 cask "docker-desktop" if OS.mac?

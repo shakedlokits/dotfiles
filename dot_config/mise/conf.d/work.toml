@@ -2,10 +2,8 @@
 
 # -- [[ Runtimes ]]
 java = 'temurin-8'
-scala = "latest"
 
 # -- [[ Tools ]]
-sbt = "latest"
 atlas = "latest"
 buf = "latest"
 terraform = "latest"
