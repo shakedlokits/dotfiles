@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+# Install XCode Command Line Tools
+# TODO: Move to a different script
 {{ if eq .chezmoi.os "darwin" }}
 if xcode-select -p &> /dev/null; then
   echo "Xcode Command Line Tools are installed."
@@ -9,6 +11,34 @@ else
 fi
 {{ end }}
 
+# Identify Homebrew install location
+{{ if eq .chezmoi.os "darwin" -}}
+  {{- if eq .chezmoi.arch "arm64" }}
+BREW_PREFIX_DEFAULT="/opt/homebrew"
+  {{- else }}
+BREW_PREFIX_DEFAULT="/usr/local"
+  {{- end }}
+{{- else if eq .chezmoi.os "linux" -}}
+BREW_PREFIX_DEFAULT="/home/linuxbrew/.linuxbrew"
+{{- else }}
+BREW_PREFIX_DEFAULT=""
+{{- end }}
 
+# Install Hombrew if required
+if ! command -v brew >/dev/null 2>&1; then
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
-# brew bundle install --file ~/.config/homebrew/Brewfile
+# Include homebrew if not on PATH
+if [[ -n "${BREW_PREFIX_DEFAULT:-}" && -x "${BREW_PREFIX_DEFAULT}/bin/brew" ]]; then
+  eval "$("${BREW_PREFIX_DEFAULT}/bin/brew" shellenv)"
+fi
+
+# Error if homebrew is still not on path
+if ! command -v brew >/dev/null 2>&1; then
+  echo "brew not found on PATH after installation; check your Homebrew install." >&2
+  exit 1
+fi
+
+# Run the installation of the brew bundle
+brew bundle install --file ~/.config/homebrew/Brewfile
