@@ -55,17 +55,17 @@ zinit as="command" lucid from="gh-r" for \
     jdx/mise
 
 # ---------------------- Initialize Brew ---------------------------
-zi for \
-    as'null' \
-    atclone'%atpull' \
-    atpull'
-         ./bin/brew update --preinstall \
-      && ln -sf $PWD/completions/zsh/_brew $ZINIT[COMPLETIONS_DIR] \
-      && rm -f brew.zsh \
-      && ./bin/brew shellenv --dummy-arg > brew.zsh \
-      && zcompile brew.zsh' \
-    depth'3' \
-    nocompletions \
-    sbin'bin/brew' \
-    src'brew.zsh' \
-  homebrew/brew
+# zi for \
+#     as'null' \
+#     atclone'%atpull' \
+#     atpull'
+#          ./bin/brew update --preinstall \
+#       && ln -sf $PWD/completions/zsh/_brew $ZINIT[COMPLETIONS_DIR] \
+#       && rm -f brew.zsh \
+#       && ./bin/brew shellenv --dummy-arg > brew.zsh \
+#       && zcompile brew.zsh' \
+#     depth'3' \
+#     nocompletions \
+#     sbin'bin/brew' \
+#     src'brew.zsh' \
+#   homebrew/brew
