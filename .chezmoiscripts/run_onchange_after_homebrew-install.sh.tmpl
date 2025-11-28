@@ -1,0 +1,42 @@
+#!/bin/zsh
+
+set -euo pipefail
+
+# The has below is used to detect changes to the Brewfile requirements files in order to trigger Chezmoi
+# requirements hash:
+{{- $dir := joinPath "$HOME" ".config/homebrew/conf.d" -}}
+{{- $files := glob (printf "%s/*.rb" $dir) | sortAlpha -}}
+{{- $buf := "" -}}
+{{- range $f := $files -}}
+  {{- $buf = printf "%s%s" $buf (include $f) -}}
+{{- end -}}
+{{- $buf | sha256sum }}
+
+# Identify Homebrew install location
+{{ if eq .chezmoi.os "darwin" -}}
+  {{- if eq .chezmoi.arch "arm64" }}
+BREW_PREFIX_DEFAULT="/opt/homebrew"
+  {{- else }}
+BREW_PREFIX_DEFAULT="/usr/local"
+  {{- end }}
+{{- else if eq .chezmoi.os "linux" -}}
+BREW_PREFIX_DEFAULT="/home/linuxbrew/.linuxbrew"
+{{- else }}
+BREW_PREFIX_DEFAULT=""
+{{- end }}
+
+# Include homebrew if not on PATH
+if [[ -n "${BREW_PREFIX_DEFAULT:-}" && -x "${BREW_PREFIX_DEFAULT}/bin/brew" ]]; then
+  eval "$("${BREW_PREFIX_DEFAULT}/bin/brew" shellenv)"
+fi
+
+# Error if homebrew is still not on path
+if ! command -v brew >/dev/null 2>&1; then
+  echo "WARNING: Homebrew not found on PATH after installation; check your Homebrew install." >&2
+  exit 0
+fi
+
+# Run the installation of the brew bundle
+echo "INFO: Running brew bundle install"
+brew bundle install --file ~/.config/homebrew/Brewfile
+echo "INFO: brew bundle install completed."
