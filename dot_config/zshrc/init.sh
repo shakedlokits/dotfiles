@@ -53,19 +53,3 @@ zinit as="command" lucid from="gh-r" for \
     atpull="%atclone" \
     atload='eval "$(mise activate zsh)"' \
     jdx/mise
-
-# ---------------------- Initialize Brew ---------------------------
-# zi for \
-#     as'null' \
-#     atclone'%atpull' \
-#     atpull'
-#          ./bin/brew update --preinstall \
-#       && ln -sf $PWD/completions/zsh/_brew $ZINIT[COMPLETIONS_DIR] \
-#       && rm -f brew.zsh \
-#       && ./bin/brew shellenv --dummy-arg > brew.zsh \
-#       && zcompile brew.zsh' \
-#     depth'3' \
-#     nocompletions \
-#     sbin'bin/brew' \
-#     src'brew.zsh' \
-#   homebrew/brew

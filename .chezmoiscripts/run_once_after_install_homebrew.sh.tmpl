@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+{{ if eq .chezmoi.os "darwin" }}
+if xcode-select -p &> /dev/null; then
+  echo "Xcode Command Line Tools are installed."
+else
+  echo "Installing Xcode Command Line Tools"
+  sudo softwareupdate --install-rosetta --agree-to-license
+fi
+{{ end }}
+
+
+
+# brew bundle install --file ~/.config/homebrew/Brewfile
