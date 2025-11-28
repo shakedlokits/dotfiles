@@ -4,7 +4,6 @@
 node = '20'
 python = '3.10.12'
 rust = 'latest'
-java = 'temurin-8'
 go = 'latest'
 
 # -- [[ Tools ]]

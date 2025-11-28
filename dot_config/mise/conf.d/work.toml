@@ -1,6 +1,7 @@
 [tools]
 
 # -- [[ Runtimes ]]
+java = 'temurin-8'
 scala = "latest"
 
 # -- [[ Tools ]]

@@ -64,7 +64,6 @@ zi for \
       && rm -f brew.zsh \
       && ./bin/brew shellenv --dummy-arg > brew.zsh \
       && zcompile brew.zsh' \
-    atload'brew bundle install --file="~/.config/homebrew/Brewfile"'\
     depth'3' \
     nocompletions \
     sbin'bin/brew' \
