@@ -1,5 +1,23 @@
 #!/bin/zsh
 
+# This file is a work-in-progress.
+# The goal for this is to automatically install Brew on first initialization.
+# Though I'm not entirely sure It's needed because it's not that often.
+# 
+# If I do decide to carry on with this, then thats, what's needed:
+# - [x] Get homebrew install location
+# - [-] (not-tested) Install homebrew if not exists
+# - [-] Install homebrew requirements based on the `.chezmoi.os` (for Mac/Linux) and `.chezmoi.osRelease.id` (for Linux distro)
+#     - [-] (not-tested) macOS: xcode command line tools 
+#     - [ ] linux: distro based (https://docs.brew.sh/Homebrew-on-Linux#requirements)
+# - [ ] Validate `brew doctor` works as expected
+# - [x] Initialize brew on the current session (eval)
+# - [x] Run the initial installation of the Brewfile (`brew bundle install --file ...`)
+# 
+# For now I'm adding an optional installation based on Brewfile hash whenever I apply chezmoi.
+# TODO: Add Homebrew automatic install
+
+
 # Install XCode Command Line Tools
 # TODO: Move to a different script
 {{ if eq .chezmoi.os "darwin" }}
@@ -24,7 +42,7 @@ BREW_PREFIX_DEFAULT="/home/linuxbrew/.linuxbrew"
 BREW_PREFIX_DEFAULT=""
 {{- end }}
 
-# Install Hombrew if required
+# Install homebrew if required
 if ! command -v brew >/dev/null 2>&1; then
   NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
