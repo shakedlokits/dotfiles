@@ -1,8 +1,6 @@
 CONFIGS=$HOME/.config/zshrc
-FILES_STR=$(find $CONFIGS -type f -name '*.sh' ! -name 'init.sh')
+FILES_STR=$(find $CONFIGS -type f -name '*.sh' | sort)
 FILES=($(echo $FILES_STR | tr '\n' ' '))
-
-source $CONFIGS/init.sh
 
 for FILE in $FILES; do
     source $FILE

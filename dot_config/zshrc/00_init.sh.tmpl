@@ -53,3 +53,24 @@ zinit as="command" lucid from="gh-r" for \
     atpull="%atclone" \
     atload='eval "$(mise activate zsh)"' \
     jdx/mise
+
+# ---------------------- Initialize Mise ---------------------------
+# Identify Homebrew install location
+{{ if eq .chezmoi.os "darwin" -}}
+  {{- if eq .chezmoi.arch "arm64" }}
+BREW_PREFIX_DEFAULT="/opt/homebrew"
+  {{- else }}
+BREW_PREFIX_DEFAULT="/usr/local"
+  {{- end }}
+{{- else if eq .chezmoi.os "linux" -}}
+BREW_PREFIX_DEFAULT="/home/linuxbrew/.linuxbrew"
+{{- else }}
+BREW_PREFIX_DEFAULT=""
+{{- end }}
+
+# Include homebrew if not on PATH
+if [[ -n "${BREW_PREFIX_DEFAULT:-}" && -x "${BREW_PREFIX_DEFAULT}/bin/brew" ]]; then
+  eval "$("${BREW_PREFIX_DEFAULT}/bin/brew" shellenv)"
+fi
+
+
