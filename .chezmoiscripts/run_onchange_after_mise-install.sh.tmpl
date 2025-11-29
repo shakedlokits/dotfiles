@@ -1,7 +1,5 @@
 #!/bin/zsh
 
-set -euo pipefail
-
 # The has below is used to detect changes to the Mise requirements files in order to trigger Chezmoi
 # requirements hash:
 {{- $dir := joinPath "$HOME" ".config/mise/conf.d" -}}
@@ -18,7 +16,7 @@ source ~/.zshrc
 # Check if Mise is installed
 if ! command -v mise >/dev/null 2>&1; then
   echo "WARNING: Mise not found, skipping Mise install."
-  exit 0
+  exit 127
 fi
 
 # Running Mise installation
