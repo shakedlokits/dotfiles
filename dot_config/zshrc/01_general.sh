@@ -34,3 +34,6 @@ export EDITOR=nvim
 
 # Show hidden files
 setopt globdots
+
+# Add user bin directory
+export PATH="$HOME/bin:$PATH"
