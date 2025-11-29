@@ -31,7 +31,7 @@ fi
 # Error if homebrew is still not on path
 if ! command -v brew >/dev/null 2>&1; then
   echo "WARNING: Homebrew not found on PATH after installation; check your Homebrew install." >&2
-  exit 127
+  exit 0
 fi
 
 # Run the installation of the brew bundle

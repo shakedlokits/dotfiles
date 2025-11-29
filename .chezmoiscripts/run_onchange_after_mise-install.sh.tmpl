@@ -16,7 +16,7 @@ source ~/.zshrc
 # Check if Mise is installed
 if ! command -v mise >/dev/null 2>&1; then
   echo "WARNING: Mise not found, skipping Mise install."
-  exit 127
+  exit 0
 fi
 
 # Running Mise installation
