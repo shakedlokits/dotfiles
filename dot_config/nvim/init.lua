@@ -16,7 +16,7 @@ vim.g.have_nerd_font = true
 vim.o.number = true
 -- You can also add relative line numbers, to help with jumping.
 --  Experiment for yourself to see if you like it!
--- vim.o.relativenumber = true
+vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = "a"
@@ -97,6 +97,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 -- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
 -- TIP: Disable arrow keys in normal mode
 vim.keymap.set("n", "<left>", '<cmd>echo "Use h to move!!"<CR>')
@@ -260,6 +261,7 @@ require("lazy").setup({
 			spec = {
 				{ "<leader>s", group = "[S]earch" },
 				{ "<leader>t", group = "[T]oggle" },
+				{ "<leader>a", group = "[A]I" },
 				{ "<leader>h", group = "Git [H]unk", mode = { "n", "v" } },
 			},
 		},
@@ -801,6 +803,197 @@ require("lazy").setup({
 		},
 	},
 
+	{
+		"m4xshen/hardtime.nvim",
+		lazy = false,
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = {},
+	},
+
+	{
+		"kdheepak/lazygit.nvim",
+		lazy = true,
+		cmd = {
+			"LazyGit",
+			"LazyGitConfig",
+			"LazyGitCurrentFile",
+			"LazyGitFilter",
+			"LazyGitFilterCurrentFile",
+		},
+		-- optional for floating window border decoration
+		dependencies = {
+			"nvim-telescope/telescope.nvim",
+			"nvim-lua/plenary.nvim",
+		},
+		config = function()
+			require("telescope").load_extension("lazygit")
+		end,
+		-- setting the keybinding for LazyGit with 'keys' is recommended in
+		-- order to load the plugin when the command is run for the first time
+		keys = {
+			{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" },
+		},
+	},
+
+	{
+		"nvim-telescope/telescope-file-browser.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+		config = function()
+			vim.keymap.set("n", "<leader>sb", ":Telescope file_browser<CR>", { desc = "[S]earch File [B]rowser" })
+		end,
+	},
+
+	{
+		{
+			"nvim-neo-tree/neo-tree.nvim",
+			branch = "v3.x",
+			dependencies = {
+				"nvim-lua/plenary.nvim",
+				"MunifTanjim/nui.nvim",
+				"nvim-tree/nvim-web-devicons", -- optional, but recommended
+			},
+			lazy = false, -- neo-tree will lazily load itself
+			config = function()
+				vim.keymap.set("n", "<leader>te", ":Neotree<CR>", { desc = "[T]oggle [E]explorer" })
+			end,
+		},
+	},
+
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		opts = {
+			menu = {
+				width = vim.api.nvim_win_get_width(0) - 4,
+			},
+			settings = {
+				save_on_toggle = true,
+			},
+		},
+		keys = function()
+			local keys = {
+				{
+					"<leader>H",
+					function()
+						require("harpoon"):list():add()
+					end,
+					desc = "Harpoon File",
+				},
+				{
+					"<leader>h",
+					function()
+						local harpoon = require("harpoon")
+						harpoon.ui:toggle_quick_menu(harpoon:list())
+					end,
+					desc = "Harpoon Quick Menu",
+				},
+			}
+
+			for i = 1, 9 do
+				table.insert(keys, {
+					"<leader>" .. i,
+					function()
+						require("harpoon"):list():select(i)
+					end,
+					desc = "Harpoon to File " .. i,
+				})
+			end
+			return keys
+		end,
+	},
+
+	{
+		"Kicamon/markdown-table-mode.nvim",
+		config = function()
+			require("markdown-table-mode").setup()
+		end,
+	},
+
+	{
+		"NickvanDyke/opencode.nvim",
+		dependencies = {
+			-- Recommended for `ask()` and `select()`.
+			-- Required for `snacks` provider.
+			---@module 'snacks' <- Loads `snacks.nvim` types for configuration intellisense.
+			{ "folke/snacks.nvim", opts = { input = {}, picker = {}, terminal = {} } },
+		},
+		config = function()
+			---@type opencode.Opts
+			vim.g.opencode_opts = {
+				provider = {
+					enabled = "snacks",
+					snacks = {},
+				},
+			}
+
+			-- Required for `opts.events.reload`.
+			vim.o.autoread = true
+
+			-- Keymaps
+			vim.keymap.set({ "n", "x" }, "<C-a>", function()
+				require("opencode").ask("@this: ", { submit = true })
+			end, { desc = "Ask opencode" })
+			vim.keymap.set({ "n", "x" }, "<C-x>", function()
+				require("opencode").select()
+			end, { desc = "Execute opencode action…" })
+			vim.keymap.set({ "n", "x" }, "ga", function()
+				require("opencode").prompt("@this")
+			end, { desc = "Add to opencode" })
+			vim.keymap.set({ "n", "t" }, "<C-t>", function()
+				require("opencode").toggle()
+			end, { desc = "Toggle opencode" })
+			vim.keymap.set("n", "<S-C-u>", function()
+				require("opencode").command("session.half.page.up")
+			end, { desc = "opencode half page up" })
+			vim.keymap.set("n", "<S-C-d>", function()
+				require("opencode").command("session.half.page.down")
+			end, { desc = "opencode half page down" })
+			-- You may want these if you stick with the opinionated "<C-a>" and "<C-x>" above — otherwise consider "<leader>o".
+			vim.keymap.set("n", "+", "<C-a>", { desc = "Increment", noremap = true })
+			vim.keymap.set("n", "-", "<C-x>", { desc = "Decrement", noremap = true })
+		end,
+	},
+
+	{
+		"scalameta/nvim-metals",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"saghen/blink.cmp",
+		},
+		ft = { "scala", "sbt", "java" },
+		opts = function()
+			local metals_config = require("metals").bare_config()
+
+			-- Get LSP capabilities from blink.cmp (same as other LSP servers)
+			metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
+
+			-- Use Java 25 to run Metals server itself (Metals requires Java 17+)
+			-- This sets the Java that Metals LSP server runs with
+			metals_config.settings = {
+				javaHome = "/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home",
+			}
+
+			-- Also set JAVA_HOME environment variable for the Metals process
+			metals_config.init_options = {
+				statusBarProvider = "on",
+			}
+
+			return metals_config
+		end,
+		config = function(self, metals_config)
+			-- Set JAVA_HOME environment variable before starting Metals
+			vim.env.JAVA_HOME = "/opt/homebrew/Cellar/openjdk/25.0.1/libexec/openjdk.jdk/Contents/Home"
+
+			local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = self.ft,
+				callback = function()
+					require("metals").initialize_or_attach(metals_config)
+				end,
+				group = nvim_metals_group,
+			})
+		end,
+	},
 	{ -- You can easily change to a different colorscheme.
 		-- Change the name of the colorscheme plugin below, and then
 		-- change the command in the config to whatever the name of that colorscheme is.
@@ -828,7 +1021,7 @@ require("lazy").setup({
 		"folke/todo-comments.nvim",
 		event = "VimEnter",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = { signs = false },
+		opts = {},
 	},
 
 	{ -- Collection of various small independent plugins/modules

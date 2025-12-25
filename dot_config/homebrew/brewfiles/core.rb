@@ -6,6 +6,8 @@ brew "luarocks"
 brew "sevenzip"
 brew "pcre2"
 brew "less"
+brew "weechat"
+brew "libmagic"
 
 cask "ngrok" if OS.mac?
 cask "docker-desktop" if OS.mac?

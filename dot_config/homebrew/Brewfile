@@ -1,6 +1,7 @@
 # This Brewfile runs all of brewfiles directory
 
-brewfile_dir = File.expand_path("./brewfiles/")
+brewfile_dir = File.expand_path("~/.config/homebrew/brewfiles/")
+puts "Loading brewfiles from #{brewfile_dir}"
 
 Dir.glob("#{brewfile_dir}/*.rb").sort.each do |file|
   puts "Loading sub-Brewfile: #{File.basename(file)}"

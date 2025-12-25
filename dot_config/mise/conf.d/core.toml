@@ -5,22 +5,45 @@ node = '20'
 python = '3.10.12'
 rust = 'latest'
 go = 'latest'
+bun = 'latest'
+ruby = 'latest'
 
 # -- [[ Tools ]]
 neovim = 'latest'
+uv = 'latest'
 github-cli = 'latest'
 act = "latest"
 helm = "latest"
 helmfile = "latest"
 yarn = "latest"
-imagemagick = "latest"
 kubectl = "latest"
-
-# -- [[ CLI Tools ]]
 bat = 'latest'
 eza = 'latest'
 aws-cli = 'latest'
 fzf = 'latest'
 jq = "latest"
 yq = "latest"
+yazi = "latest"
 ast-grep = "latest"
+lazygit = "latest"
+"go:github.com/jorgerojas26/lazysql" = { version = "latest" }
+tmux = "latest"
+opencode = "latest"
+lnav = "latest"
+steampipe = "latest"
+pandoc = "latest"
+lazydocker = "latest"
+delta = "latest"
+
+[tasks.complexity]
+description = 'Run a complexity test on a directory'
+run = 'mise x go:github.com/boyter/scc/v3@latest -- scc --by-file --not-match ".*(Test|test).*" --format wide --percent --wide --sort "complexity"'
+dir = "{{cwd}}"
+
+[tasks.prs]
+description = "Search and open GitHub PRs"
+run = "gh search prs --author=@me --state=open | column -t -s $'\t' | fzf --wrap | awk '{print $1, $2}' | xargs -L1 sh -c 'gh pr view --web --repo \"$1\" \"$2\"' _"
+
+[tasks.checkout]
+description = "List and checkout the latest git branches"
+run = "git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:relative)%09%(refname:short)' | fzf --wrap | awk -F'\t' '{print $2}' | xargs -I {} git checkout {}"

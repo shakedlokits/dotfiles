@@ -6,6 +6,7 @@ brew "nuclei"
 brew "promptfoo"
 brew "protobuf"
 
+cask "claude-code" if OS.mac?
 cask "lens" if OS.mac?
 cask "openlens" if OS.mac?
 

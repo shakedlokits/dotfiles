@@ -10,4 +10,4 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light changyuheng/zsh-interactive-cd
 zinit light b4b4r07/enhancd
 zinit light "MichaelAquilina/zsh-you-should-use"
- 
+zinit light zsh-users/zsh-history-substring-search 

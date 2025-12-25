@@ -1,0 +1,13 @@
+{{/* chezmoi:modify-template */ -}}
+{{- $path := "~/.config/git/config_personal" -}}
+{{- $needle := printf "path = %s" $path -}}
+{{- $block := printf "[include]\n\tpath = %s\n" $path -}}
+{{- $s := .chezmoi.stdin -}}
+
+{{- if eq (len $s) 0 -}}
+{{- $block -}}
+{{- else if contains $needle $s -}}
+{{- $s -}}
+{{- else -}}
+{{- printf "%s\n\n%s" (trimSuffix "\n" $s) $block -}}
+{{- end -}}

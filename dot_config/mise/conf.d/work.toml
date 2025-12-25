@@ -1,7 +1,7 @@
 [tools]
 
 # -- [[ Runtimes ]]
-java = 'temurin-8'
+java = "zulu-jre-8.90.0.19"
 
 # -- [[ Tools ]]
 atlas = "latest"
@@ -13,3 +13,9 @@ minikube = "latest"
 
 # -- [[ CLI Tools ]]
 mark = "latest"
+uv = "latest"
+
+[tasks.repos]
+description = 'Search and open organization repositories'
+run = 'gh s --user=Secful | xargs -I {} open --url {}'
+
