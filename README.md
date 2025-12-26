@@ -50,10 +50,16 @@ This setup follows a modular architecture designed for cross-platform compatibil
 - **Homebrew** - macOS-specific applications and packages
 - **zinit** - Fast, flexible zsh plugin manager
 - **Powerlevel10k** - Beautiful and blazingly fast prompt theme
+- **tmux** - Terminal multiplexer with TPM plugin manager
 
 ### Directory Structure
 ```
 ~/.config/
+├── atuin/
+│   └── config.toml        # Shell history configuration
+├── git/
+│   ├── config_personal
+│   └── modify_config
 ├── mise/
 │   └── conf.d/
 │       ├── core.toml      # Cross-platform tools and runtimes
@@ -63,11 +69,17 @@ This setup follows a modular architecture designed for cross-platform compatibil
 │   └── brewfiles/
 │       ├── core.rb        # macOS-specific apps
 │       └── work.rb        # Work-related macOS tools
+├── nvim/
+│   └── init.lua           # Neovim configuration
+├── tmux/
+│   └── tmux.conf          # Tmux configuration
 └── zshrc/
+    ├── 00_init.sh.tmpl    # Initialization
     ├── 01_general.sh      # History, locale, editor settings
     ├── 02_completion.sh   # Zinit plugins and completions
     ├── 03_aliases.sh      # Command aliases
-    └── 04_functions.sh    # Helper functions and utilities
+    ├── 04_functions.sh    # Helper functions and utilities
+    └── 05_keymaps.sh.tmpl # Platform-specific keymaps
 ```
 
 ## Useful Commands
@@ -105,6 +117,9 @@ Built with modern dotfile management tools:
 - [Mise](https://mise.jdx.dev/) - Development environment manager
 - [zinit](https://github.com/zdharma-continuum/zinit) - Zsh plugin manager
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
+- [Atuin](https://atuin.sh/) - Shell history
+- [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
+- [Neovim Kickstart](https://github.com/nvim-lua/kickstart.nvim) - Neovim configuration
 
 ## License
 
