@@ -98,18 +98,6 @@ mise list
 brew bundle install --file ~/.config/homebrew/Brewfile
 ```
 
-## Backlog
-
-- [ ] Security & Secrets
-  - [ ] Password manager integration (1Password/Bitwarden CLI)
-  - [ ] Encrypted work configuration support
-  - [ ] Private repository credentials management
-- [ ] History management integration
-- [ ] Automation
-  - [ ] Automatic Nerd Font installation verification
-  - [ ] Automatic Homebrew installation in bootstrap
-  - [ ] Install Intellij automatically
-
 ## Inspiration & Credits
 
 Built with modern dotfile management tools:
