@@ -38,6 +38,9 @@ setopt globdots
 # Add user bin directory
 export PATH="$HOME/bin:$PATH"
 
+# Add XDG Config Path
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # History managment
 # line 1: `atuin` binary as command, from github release, only look at .tar.gz files, use the `atuin` file from the extracted archive
 # line 2: setup at clone(create init.zsh, completion)

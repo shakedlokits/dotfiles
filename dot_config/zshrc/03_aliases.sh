@@ -9,4 +9,4 @@ zinit wait lucid for OMZP::git
 
 
 alias ls="eza -alhUGg --git"
-alias cat=bat 
+alias cat="bat --theme=ansi"

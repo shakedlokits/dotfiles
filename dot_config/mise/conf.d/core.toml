@@ -34,6 +34,7 @@ steampipe = "latest"
 pandoc = "latest"
 lazydocker = "latest"
 delta = "latest"
+gh = "latest"
 
 [tasks.complexity]
 description = 'Run a complexity test on a directory'
