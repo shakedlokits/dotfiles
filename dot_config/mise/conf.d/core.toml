@@ -35,6 +35,8 @@ pandoc = "latest"
 lazydocker = "latest"
 delta = "latest"
 gh = "latest"
+pitchfork = "1.3.0"
+"pipx:litellm" = { version = "latest", extras = "proxy" }
 
 [tasks.complexity]
 description = 'Run a complexity test on a directory'

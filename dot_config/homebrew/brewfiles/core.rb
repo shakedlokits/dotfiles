@@ -8,6 +8,7 @@ brew "pcre2"
 brew "less"
 brew "weechat"
 brew "libmagic"
+brew "figlet"
 
 cask "ngrok" if OS.mac?
 cask "docker-desktop" if OS.mac?

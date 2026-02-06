@@ -34,25 +34,23 @@ return {
 	},
 
 	{
-		{
-			"nvim-neo-tree/neo-tree.nvim",
-			branch = "v3.x",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				"MunifTanjim/nui.nvim",
-				"nvim-tree/nvim-web-devicons",
-			},
-			lazy = false,
-		},
-	},
-
-	{
 		"stevearc/oil.nvim",
 		---@module 'oil'
 		---@type oil.SetupOpts
 		opts = {},
 		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
 		lazy = false,
+	},
+
+	{
+		"benomahony/oil-git.nvim",
+		dependencies = { "stevearc/oil.nvim" },
+	},
+
+	{
+		"JezerM/oil-lsp-diagnostics.nvim",
+		dependencies = { "stevearc/oil.nvim" },
+		opts = {},
 	},
 
 	{

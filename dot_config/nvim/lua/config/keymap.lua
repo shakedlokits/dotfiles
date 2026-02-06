@@ -47,9 +47,9 @@ vim.keymap.set("n", "<leader>sn", function()
 	require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
 
--- Navigation (Neo-tree)
+-- Navigation (Oil)
 
-vim.keymap.set("n", "<leader>te", "<cmd>Neotree<cr>", { desc = "[T]oggle [E]xplorer" })
+vim.keymap.set("n", "<leader>o", "<cmd>Oil<cr>", { desc = "[O]il" })
 
 -- Navigation (Harpoon)
 
@@ -146,14 +146,49 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		vim.keymap.set("n", "<leader>lk", vim.lsp.buf.hover, { buffer = event.buf, desc = "LSP: Hover Documentation" })
 		vim.keymap.set("n", "<leader>ln", vim.lsp.buf.rename, { buffer = event.buf, desc = "LSP: Re[n]ame" })
-		vim.keymap.set({ "n", "x" }, "<leader>la", vim.lsp.buf.code_action, { buffer = event.buf, desc = "LSP: Code [A]ction" })
-		vim.keymap.set("n", "<leader>lr", "<cmd>Telescope lsp_references<cr>", { buffer = event.buf, desc = "LSP: [R]eferences" })
-		vim.keymap.set("n", "<leader>li", "<cmd>Telescope lsp_implementations<cr>", { buffer = event.buf, desc = "LSP: [I]mplementation" })
-		vim.keymap.set("n", "<leader>ld", "<cmd>Telescope lsp_definitions<cr>", { buffer = event.buf, desc = "LSP: [D]efinition" })
+		vim.keymap.set(
+			{ "n", "x" },
+			"<leader>la",
+			vim.lsp.buf.code_action,
+			{ buffer = event.buf, desc = "LSP: Code [A]ction" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>lr",
+			"<cmd>Telescope lsp_references<cr>",
+			{ buffer = event.buf, desc = "LSP: [R]eferences" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>li",
+			"<cmd>Telescope lsp_implementations<cr>",
+			{ buffer = event.buf, desc = "LSP: [I]mplementation" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>ld",
+			"<cmd>Telescope lsp_definitions<cr>",
+			{ buffer = event.buf, desc = "LSP: [D]efinition" }
+		)
 		vim.keymap.set("n", "<leader>lD", vim.lsp.buf.declaration, { buffer = event.buf, desc = "LSP: [D]eclaration" })
-		vim.keymap.set("n", "<leader>ls", "<cmd>Telescope lsp_document_symbols<cr>", { buffer = event.buf, desc = "LSP: Document [S]ymbols" })
-		vim.keymap.set("n", "<leader>lw", "<cmd>Telescope lsp_dynamic_workspace_symbols<cr>", { buffer = event.buf, desc = "LSP: [W]orkspace Symbols" })
-		vim.keymap.set("n", "<leader>lt", "<cmd>Telescope lsp_type_definitions<cr>", { buffer = event.buf, desc = "LSP: [T]ype Definition" })
+		vim.keymap.set(
+			"n",
+			"<leader>ls",
+			"<cmd>Telescope lsp_document_symbols<cr>",
+			{ buffer = event.buf, desc = "LSP: Document [S]ymbols" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>lw",
+			"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>",
+			{ buffer = event.buf, desc = "LSP: [W]orkspace Symbols" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>lt",
+			"<cmd>Telescope lsp_type_definitions<cr>",
+			{ buffer = event.buf, desc = "LSP: [T]ype Definition" }
+		)
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
 		if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_inlayHint, event.buf) then
