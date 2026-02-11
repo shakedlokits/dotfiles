@@ -16,6 +16,7 @@ return {
 				{ "<leader>R", group = "[R]equest (HTTP)" },
 				{ "<leader>s", group = "[S]earch" },
 				{ "<leader>t", group = "[T]oggle" },
+				{ "<leader>d", group = "[D]iagnostics" },
 			},
 		},
 	},

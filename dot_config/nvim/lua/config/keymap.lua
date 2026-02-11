@@ -28,6 +28,7 @@ vim.keymap.set("n", "<leader>sr", "<cmd>Telescope resume<cr>", { desc = "[S]earc
 vim.keymap.set("n", "<leader>s.", "<cmd>Telescope oldfiles<cr>", { desc = '[S]earch Recent Files ("." for repeat)' })
 vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>", { desc = "[ ] Find existing buffers" })
 vim.keymap.set("n", "<leader>sb", "<cmd>Telescope file_browser<cr>", { desc = "[S]earch File [B]rowser" })
+vim.keymap.set("n", "<leader>sm", "<cmd>Telescope noice<cr>", { desc = "[S]earch [M]essages" })
 
 vim.keymap.set("n", "<leader>/", function()
 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
@@ -46,6 +47,13 @@ end, { desc = "[S]earch [/] in Open Files" })
 vim.keymap.set("n", "<leader>sn", function()
 	require("telescope.builtin").find_files({ cwd = vim.fn.stdpath("config") })
 end, { desc = "[S]earch [N]eovim files" })
+
+-- Diagnostics (Trouble)
+
+vim.keymap.set("n", "<leader>dm", "<cmd>Trouble<cr>", { desc = "[D]iagnostics [M]enu" })
+vim.keymap.set("n", "<leader>ds", "<cmd>Trouble symbols toggle<cr>", { desc = "[D]iagnostics [S]ymbols" })
+vim.keymap.set("n", "<leader>do", "<cmd>Trouble diagnostics toggle<cr>", { desc = "[D]iagnostics [O]pen" })
+vim.keymap.set("n", "<leader>dt", "<cmd>Trouble telescope toggle<cr>", { desc = "[D]iagnostics [T]elescope" })
 
 -- Navigation (Oil)
 
@@ -71,6 +79,8 @@ end
 -- Git
 
 vim.keymap.set("n", "<leader>gl", "<cmd>LazyGit<cr>", { desc = "[L]azyGit" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<cr>", { desc = "Neo[g]it" })
+vim.keymap.set("n", "<leader>gq", "<cmd>Gitsign setqflist all<cr>", { desc = "[Q]uickfix" })
 
 -- Buffer (Snacks Scratch)
 

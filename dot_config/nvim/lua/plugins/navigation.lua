@@ -15,16 +15,26 @@ return {
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
 		},
 		config = function()
+			local actions = require("telescope.actions")
+			local open_with_trouble = require("trouble.sources.telescope").open
+
 			require("telescope").setup({
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
 					},
 				},
+				defaults = {
+					mappings = {
+						i = { ["<c-t>"] = open_with_trouble },
+						n = { ["<c-t>"] = open_with_trouble },
+					},
+				},
 			})
 
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
+			pcall(require("telescope").load_extension, "noice")
 		end,
 	},
 
@@ -38,6 +48,9 @@ return {
 		---@module 'oil'
 		---@type oil.SetupOpts
 		opts = {},
+		view_options = {
+			show_hidden = true,
+		},
 		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
 		lazy = false,
 	},
