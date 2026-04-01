@@ -37,6 +37,7 @@ setopt globdots
 
 # Add user bin directory
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
 
 # Add XDG Config Path
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -49,3 +50,10 @@ zinit ice as"command" from"gh-r" bpick"atuin-*.tar.gz" mv"atuin*/atuin -> atuin"
     atclone"./atuin init zsh > init.zsh; ./atuin gen-completions --shell zsh > _atuin" \
     atpull"%atclone" src"init.zsh"
 zinit light atuinsh/atuin
+
+# Television integration
+zinit ice wait"1" lucid id-as"tv-init" has"tv" \
+    atclone"tv init zsh > init.zsh" \
+    atpull"%atclone" \
+    src"init.zsh"
+zinit light zdharma-continuum/null

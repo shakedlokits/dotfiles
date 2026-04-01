@@ -29,6 +29,7 @@ vim.keymap.set("n", "<leader>s.", "<cmd>Telescope oldfiles<cr>", { desc = '[S]ea
 vim.keymap.set("n", "<leader><leader>", "<cmd>Telescope buffers<cr>", { desc = "[ ] Find existing buffers" })
 vim.keymap.set("n", "<leader>sb", "<cmd>Telescope file_browser<cr>", { desc = "[S]earch File [B]rowser" })
 vim.keymap.set("n", "<leader>sm", "<cmd>Telescope noice<cr>", { desc = "[S]earch [M]essages" })
+vim.keymap.set("n", "<leader>sz", "<cmd>Telescope zk notes<cr>", { desc = "[S]earch [Z]ettelkasten" })
 
 vim.keymap.set("n", "<leader>/", function()
 	require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({

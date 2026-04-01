@@ -15,3 +15,4 @@ cask "docker-desktop" if OS.mac?
 cask "font-jetbrains-mono-nerd-font" if OS.mac?
 cask "ghostty" if OS.mac?
 cask "google-chrome" if OS.mac?
+cask "jordanbaird-ice" if OS.mac?

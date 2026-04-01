@@ -35,6 +35,7 @@ return {
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
 			pcall(require("telescope").load_extension, "noice")
+			pcall(require("telescope").load_extension, "zk")
 		end,
 	},
 

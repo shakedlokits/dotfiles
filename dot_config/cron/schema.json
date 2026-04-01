@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Cron Tasks",
+  "description": "Scheduled task definitions for crontab generation",
+  "type": "object",
+  "required": ["tasks"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "schedule", "command"],
+        "additionalProperties": false,
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Task name, used for log file naming",
+            "pattern": "^[a-zA-Z0-9_-]+$"
+          },
+          "schedule": {
+            "type": "string",
+            "description": "Cron schedule expression (5-field: minute hour day-of-month month day-of-week) or @keyword. Supports *, ranges (N-N), steps (*/N, N-N/N), lists (N,N,N). Month and day-of-week fields also accept a single 3-letter name (jan-dec, sun-sat). Cross-platform: macOS and Linux intersection only.",
+            "pattern": "^(@(reboot|yearly|annually|monthly|weekly|daily|midnight|hourly)|(((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?)(,((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?))*) (((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?)(,((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?))*) (((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?)(,((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?))*) (((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?)(,((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?))*|[a-zA-Z]{3}) (((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?)(,((\\*|[0-9]+(-[0-9]+)?)(/[0-9]+)?))*|[a-zA-Z]{3}))$"
+          },
+          "command": {
+            "type": "string",
+            "description": "Command to execute"
+          }
+        }
+      }
+    }
+  }
+}

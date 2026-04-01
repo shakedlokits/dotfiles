@@ -9,6 +9,7 @@ return {
 				icons = {},
 			},
 			spec = {
+				{ "<leader>a", group = "[A]I" },
 				{ "<leader>b", group = "[B]uffer" },
 				{ "<leader>g", group = "[G]it" },
 				{ "<leader>h", group = "[H]arpoon" },

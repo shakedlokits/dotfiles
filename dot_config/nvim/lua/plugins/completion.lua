@@ -16,6 +16,7 @@ return {
 				opts = {},
 			},
 			"folke/lazydev.nvim",
+			"Kaiser-Yang/blink-cmp-avante",
 		},
 		--- @module 'blink.cmp'
 		--- @type blink.cmp.Config
@@ -35,27 +36,23 @@ return {
 				["<M-f>"] = { "scroll_documentation_down", "fallback" },
 
 				["<M-n>"] = { "show_signature", "hide_signature", "fallback" },
-				["<M-l>"] = {
-					function(cmp)
-						cmp.show({ providers = { "minuet" } })
-					end,
-				},
 			},
 			appearance = { nerd_font_variant = "mono" },
 			completion = {
 				documentation = { auto_show = true, auto_show_delay_ms = 500 },
 				trigger = { prefetch_on_insert = false },
+							ghost_text = { enabled = true },
 			},
 			sources = {
-				default = { "lsp", "path", "buffer", "snippets", "lazydev", "minuet" },
+				default = { "lsp", "path", "buffer", "snippets", "lazydev", "avante" },
 				providers = {
 					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
-					minuet = {
-						name = "minuet",
-						module = "minuet.blink",
-						async = true,
-						timeout_ms = 4000,
-						score_offset = 50,
+					avante = {
+						module = "blink-cmp-avante",
+						name = "Avante",
+						opts = {
+							-- options for blink-cmp-avante
+						},
 					},
 				},
 			},
