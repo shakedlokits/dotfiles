@@ -1,0 +1,27 @@
+[metadata]
+name = "cron"
+description = "Browse cron task logs"
+requirements = ["jq", "bat"]
+
+[source]
+command = "jq -r '.tasks[] | .name' ~/.config/cron/tasks.json"
+
+[preview]
+command = "bat --color=always --style=plain --line-range=-50: /tmp/cron/{}.log 2>/dev/null || echo 'No log file yet for {}'"
+
+[preview.env]
+BAT_THEME = "ansi"
+
+[keybindings]
+enter = "actions:lnav"
+
+[ui]
+layout = "landscape"
+
+[ui.preview_panel]
+size = 70
+
+[actions.lnav]
+description = "Open log in lnav"
+command = "lnav /tmp/cron/{}.log"
+mode = "execute"

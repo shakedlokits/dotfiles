@@ -1,0 +1,21 @@
+[metadata]
+name = "aws-profiles"
+description = "List and switch AWS CLI profiles"
+requirements = [ "aws", "grep",]
+
+[source]
+command = "grep '\\[profile' ~/.aws/config 2>/dev/null | sed 's/\\[profile //' | sed 's/\\]//' || grep '\\[' ~/.aws/credentials 2>/dev/null | sed 's/\\[//' | sed 's/\\]//'"
+
+[preview]
+command = "aws configure list --profile '{}' 2>/dev/null"
+
+[keybindings]
+enter = "actions:connect"
+
+[ui.preview_panel]
+size = 40
+
+[actions.connect]
+description = "Connect to the selected profile (sets AWS_PROFILE)"
+command = " aws sso login --profile {}"
+mode = "execute"
