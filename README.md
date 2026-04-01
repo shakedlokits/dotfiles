@@ -122,6 +122,7 @@ Built with modern dotfile management tools:
 - [zinit](https://github.com/zdharma-continuum/zinit) - Zsh plugin manager
 - [Powerlevel10k](https://github.com/romkatv/powerlevel10k) - Zsh theme
 - [Atuin](https://atuin.sh/) - Shell history
+- [Television](https://github.com/alexpasmantier/television) - Fuzzy finder TUI
 - [tmux](https://github.com/tmux/tmux) - Terminal multiplexer
 - [Neovim Kickstart](https://github.com/nvim-lua/kickstart.nvim) - Neovim configuration
 
