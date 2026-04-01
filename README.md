@@ -69,17 +69,21 @@ This setup follows a modular architecture designed for cross-platform compatibil
 │   └── brewfiles/
 │       ├── core.rb        # macOS-specific apps
 │       └── work.rb        # Work-related macOS tools
+├── cron/
+│   ├── tasks.json         # Scheduled task definitions
+│   └── set.sh             # Cron task installer
 ├── nvim/
 │   └── init.lua           # Neovim configuration
-├── tmux/
-│   └── tmux.conf          # Tmux configuration
+├── television/
+│   └── config.toml        # Television fuzzy finder and custom channels
 └── zshrc/
     ├── 00_init.sh.tmpl    # Initialization
     ├── 01_general.sh      # History, locale, editor settings
     ├── 02_completion.sh   # Zinit plugins and completions
     ├── 03_aliases.sh      # Command aliases
     ├── 04_functions.sh    # Helper functions and utilities
-    └── 05_keymaps.sh.tmpl # Platform-specific keymaps
+    ├── 05_keymaps.sh.tmpl # Platform-specific keymaps
+    └── 06_tmux.sh         # Tmux auto-start
 ```
 
 ## Useful Commands
