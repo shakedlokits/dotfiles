@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Drink water reminder popup"
+
+if [[ -n "$TMUX" ]]; then
+	tmux display-popup -h 100% -w 100% -E "figlet 'DRINK WATER! RIGHT NOW...'; read"
+fi
