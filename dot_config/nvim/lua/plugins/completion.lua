@@ -16,7 +16,7 @@ return {
 				opts = {},
 			},
 			"folke/lazydev.nvim",
-			"Kaiser-Yang/blink-cmp-avante",
+			-- "Kaiser-Yang/blink-cmp-avante",
 		},
 		--- @module 'blink.cmp'
 		--- @type blink.cmp.Config
@@ -41,19 +41,12 @@ return {
 			completion = {
 				documentation = { auto_show = true, auto_show_delay_ms = 500 },
 				trigger = { prefetch_on_insert = false },
-							ghost_text = { enabled = true },
+				ghost_text = { enabled = true },
 			},
 			sources = {
-				default = { "lsp", "path", "buffer", "snippets", "lazydev", "avante" },
+				default = { "lsp", "path", "buffer", "snippets", "lazydev" },
 				providers = {
 					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
-					avante = {
-						module = "blink-cmp-avante",
-						name = "Avante",
-						opts = {
-							-- options for blink-cmp-avante
-						},
-					},
 				},
 			},
 			snippets = { preset = "luasnip" },

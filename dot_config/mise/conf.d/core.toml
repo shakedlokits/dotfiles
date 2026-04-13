@@ -42,6 +42,10 @@ glow = "latest"
 "github:zk-org/zk" = "latest"
 television = "latest"
 "go:github.com/joshmedeski/sesh/v2" = { version = "latest" }
+"ollama" = "latest"
+trufflehog = "latest"
+syft = "latest"
+grype = "latest"
 
 [tasks.complexity]
 description = 'Run a complexity test on a directory'

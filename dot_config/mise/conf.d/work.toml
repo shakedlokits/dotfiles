@@ -10,6 +10,8 @@ terraform = "latest"
 localstack = "latest"
 mirrord = "latest"
 minikube = "latest"
+gcloud = "latest"
+"cargo:https://github.com/googleworkspace/cli" = "latest"
 
 # -- [[ CLI Tools ]]
 mark = "latest"

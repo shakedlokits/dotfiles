@@ -20,7 +20,10 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		end
 
 		local client = vim.lsp.get_client_by_id(event.data.client_id)
-		if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf) then
+		if
+			client
+			and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, event.buf)
+		then
 			local highlight_augroup = vim.api.nvim_create_augroup("lsp-highlight-" .. event.buf, { clear = true })
 
 			vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
@@ -43,5 +46,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				end,
 			})
 		end
+	end,
+})
+
+-- Copilot blink integration
+vim.api.nvim_create_autocmd("User", {
+	pattern = "BlinkCmpMenuOpen",
+	callback = function()
+		vim.b.copilot_suggestion_hidden = true
+	end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+	pattern = "BlinkCmpMenuClose",
+	callback = function()
+		vim.b.copilot_suggestion_hidden = false
 	end,
 })
