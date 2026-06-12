@@ -3,13 +3,8 @@
 	"tasks": [
 		{
 			"name": "water-reminder",
-			"schedule": "0 10-17 * * 0-4",
+			"schedule": "00 10-17 * * 0-4",
 			"command": "mise run water"
-		},
-		{
-			"name": "pr-review",
-			"schedule": "0 14 * * 0-4",
-			"command": "mise run pr-review"
 		}
 	]
 }

@@ -99,4 +99,20 @@ return {
 			})
 		end,
 	},
+	{
+		"mosheavni/yaml-companion.nvim",
+		opts = {
+			schemas = {
+				{
+					name = "OpenCollection v1.0.0",
+					uri = "https://schema.opencollection.com/opencollection/v1.0.0.json",
+				},
+			},
+		},
+		config = function(_, opts)
+			local cfg = require("yaml-companion").setup(opts)
+			vim.lsp.config("yamlls", cfg)
+			vim.lsp.enable("yamlls")
+		end,
+	},
 }

@@ -10,12 +10,11 @@ ruby = 'latest'
 
 # -- [[ Tools ]]
 neovim = 'latest'
+tmux = "latest"
+television = "latest"
+"go:github.com/joshmedeski/sesh/v2" = { version = "latest" }
 uv = 'latest'
-github-cli = 'latest'
-act = "latest"
-helm = "latest"
-helmfile = "latest"
-yarn = "latest"
+gh = "latest"
 kubectl = "latest"
 bat = 'latest'
 eza = 'latest'
@@ -23,39 +22,39 @@ aws-cli = 'latest'
 fzf = 'latest'
 jq = "latest"
 yq = "latest"
-yazi = "latest"
 ast-grep = "latest"
 lazygit = "latest"
-"go:github.com/jorgerojas26/lazysql" = { version = "latest" }
-tmux = "latest"
 opencode = "latest"
-lnav = "latest"
-steampipe = "latest"
 pandoc = "latest"
-lazydocker = "latest"
 delta = "latest"
-gh = "latest"
 gum = "latest"
-duf = "latest"
-"cargo:html-query" = "latest"
 glow = "latest"
+duf = "latest"
 "github:zk-org/zk" = "latest"
-television = "latest"
-"go:github.com/joshmedeski/sesh/v2" = { version = "latest" }
-"ollama" = "latest"
-trufflehog = "latest"
-syft = "latest"
-grype = "latest"
+gemini-cli = "latest"
+"asdf:mise-plugins/mise-sqlite" = "latest"
+"pipx:jc" = "latest"
+"pnpm" = "latest"
+"viteplus" = "latest"
+gcloud = "latest"
+"cargo:https://github.com/googleworkspace/cli" = "latest"
+"pipx:markitdown" = { version = "latest", extras = "all"}
+typst = "latest"
 
-[tasks.complexity]
+[tasks."github:repositories"]
+description = 'Search and open Github repositories'
+run = 'gh s --user=shakedlokits | xargs -I {} open --url {}'
+
+[tasks."github:pull-requests"]
+description = "Search and open GitHub PRs"
+run = "gh search prs --author=@me --state=open | column -t -s $'\t' | fzf --wrap | awk '{print $1, $2}' | xargs -L1 sh -c 'gh pr view --web --repo \"$1\" \"$2\"' _"
+
+[tasks."git:checkout-latest-branches"]
+description = "List and checkout the latest git branches"
+run = "git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:relative)%09%(refname:short)' | fzf --wrap | awk -F'\t' '{print $2}' | xargs -I {} git checkout {}"
+
+[tasks."code-complexity"]
 description = 'Run a complexity test on a directory'
 run = 'mise x go:github.com/boyter/scc/v3@latest -- scc --by-file --not-match ".*(Test|test).*" --format wide --percent --wide --sort "complexity"'
 dir = "{{cwd}}"
 
-[tasks.prs]
-description = "Search and open GitHub PRs"
-run = "gh search prs --author=@me --state=open | column -t -s $'\t' | fzf --wrap | awk '{print $1, $2}' | xargs -L1 sh -c 'gh pr view --web --repo \"$1\" \"$2\"' _"
-
-[tasks.checkout]
-description = "List and checkout the latest git branches"
-run = "git for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:relative)%09%(refname:short)' | fzf --wrap | awk -F'\t' '{print $2}' | xargs -I {} git checkout {}"

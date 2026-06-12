@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+#MISE description="Search OpenCode conversation history"
+
+set -euo pipefail
+
+DB_PATH="${OPENCODE_DB:-$(opencode db path)}"
+
+command -v gum &>/dev/null || { echo "gum required: brew install gum" >&2; exit 1; }
+command -v sqlite3 &>/dev/null || { echo "sqlite3 required" >&2; exit 1; }
+[[ -f "$DB_PATH" ]] || { echo "DB not found: $DB_PATH" >&2; exit 1; }
+
+query=$(gum input --prompt "Search: " --placeholder "Type to search conversations...")
+[[ -z "$query" ]] && exit 0
+
+escaped="${query//\'/\'\'}"
+results=$(sqlite3 -separator $'\t' "$DB_PATH" "
+  SELECT
+    s.id,
+    s.title || '  (' || COUNT(*) || ' matches, ' ||
+      datetime(MAX(p.time_created) / 1000, 'unixepoch', 'localtime') || ')'
+  FROM part p
+  JOIN session s ON p.session_id = s.id
+  WHERE json_extract(p.data, '\$.type') = 'text'
+    AND json_extract(p.data, '\$.text') LIKE '%${escaped}%'
+  GROUP BY p.session_id
+  ORDER BY MAX(p.time_created) DESC
+  LIMIT 50
+")
+
+if [[ -z "$results" ]]; then
+  echo "No results for: $query"
+  exit 0
+fi
+
+display=$(echo "$results" | cut -f2)
+selected=$(echo "$display" | gum filter --prompt "Pick session: " --height 20)
+session_id=$(echo "$results" | grep -F "$selected" | head -1 | cut -f1)
+
+[[ -n "$session_id" ]] && exec opencode -s "$session_id"

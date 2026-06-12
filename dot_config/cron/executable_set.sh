@@ -9,9 +9,9 @@ if [[ ! -f "$TASKS" ]]; then
   exit 1
 fi
 
-mkdir -p /tmp/cron
+mkdir -p ~/.local/share/cron/logs
 
-CRONTAB=$(echo "SHELL=/bin/zsh"; jq -r '.tasks[] | "\(.schedule)  source ~/.zshrc && \(.command) >> /tmp/cron/\(.name).log 2>&1"' "$TASKS")
+CRONTAB=$(echo "SHELL=/bin/zsh"; echo "TERM=dumb"; jq -r '.tasks[] | "\(.schedule)  source ~/.zshrc; \(.command) >> ~/.local/share/cron/logs/\(.name).log 2>&1"' "$TASKS")
 
 echo "$CRONTAB"
 echo ""

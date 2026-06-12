@@ -6,6 +6,11 @@ return {
 		},
 		cmd = "Copilot",
 		event = "InsertEnter",
-		config = true,
+		config = function()
+			require("copilot").setup({
+				suggestion = { enabled = true, auto_trigger = true, debounce = 75 },
+				filetypes = { markdown = true },
+			})
+		end,
 	},
 }

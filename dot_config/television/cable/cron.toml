@@ -13,7 +13,7 @@ command = "bat --color=always --style=plain --line-range=-50: /tmp/cron/{}.log 2
 BAT_THEME = "ansi"
 
 [keybindings]
-enter = "actions:lnav"
+enter = "actions:tail"
 
 [ui]
 layout = "landscape"
@@ -21,7 +21,7 @@ layout = "landscape"
 [ui.preview_panel]
 size = 70
 
-[actions.lnav]
-description = "Open log in lnav"
-command = "lnav /tmp/cron/{}.log"
+[actions.tail]
+description = "Tail log"
+command = "tail -f /tmp/cron/{}.log"
 mode = "execute"

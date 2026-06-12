@@ -1,12 +1,11 @@
-#                                                       
-#                                                       
-#    ██ ▄█▀ ██████ ██  ██ ██▄  ▄██ ▄████▄ █████▄ ▄█████ 
-#    ████   ██▄▄    ▀██▀  ██ ▀▀ ██ ██▄▄██ ██▄▄█▀ ▀▀▀▄▄▄ 
-#    ██ ▀█▄ ██▄▄▄▄   ██   ██    ██ ██  ██ ██     █████▀ 
-#                                                       
+#
+#
+#    ██ ▄█▀ ██████ ██  ██ ██▄  ▄██ ▄████▄ █████▄ ▄█████
+#    ████   ██▄▄    ▀██▀  ██ ▀▀ ██ ██▄▄██ ██▄▄█▀ ▀▀▀▄▄▄
+#    ██ ▀█▄ ██▄▄▄▄   ██   ██    ██ ██  ██ ██     █████▀
+#
 #    This file is in charge of aliases.
 
-{{ if eq .chezmoi.os "darwin" -}}
 # Mac specific keymaps
 bindkey -e
 bindkey "\e[1~" beginning-of-line
@@ -31,5 +30,3 @@ bindkey "\e[F" end-of-line
 bindkey '^i' expand-or-complete-prefix
 # bindkey '^[[A' history-substring-search-up
 # bindkey '^[[B' history-substring-search-down
-{{- end }}
-

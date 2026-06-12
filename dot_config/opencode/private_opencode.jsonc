@@ -1,0 +1,25 @@
+{
+	"$schema": "https://opencode.ai/config.json",
+	"mcp": {
+		"chrome-devtools": {
+			"command": [
+				"npx",
+				"-y",
+				"chrome-devtools-mcp@latest"
+			],
+			"enabled": false,
+			"type": "local"
+		}
+	},
+	"permission": {
+		"bash": {
+			"gh *": "ask",
+			"git *": "ask"
+		},
+		"slack*": "ask"
+	},
+	"plugin": [
+		"opencode-gemini-auth@latest",
+		"file:///Users/shakedlokits/.config/opencode/plugins/israeli.ts"
+	]
+}

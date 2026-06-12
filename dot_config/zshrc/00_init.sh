@@ -5,12 +5,19 @@
 #                        
 #  This file initializes zsh
 #  It should contain all the scripts that must run first
-                  
+
+# ---------------------- Shell Environment Helpers -------------------------
+is_interactive() { [[ -o interactive ]] }
+
+is_standalone_terminal() {
+    [[ -o interactive && -z "$TMUX" && -z "$NVIM" && -z "$VIM" && -z "$VIM_TERMINAL" && -z "$INSIDE_EMACS" && -z "$EMACS" && -z "$INTELLIJ_ENVIRONMENT_READER" && -z "$ZED_TERM" && -z "$VSCODE_RESOLVING_ENVIRONMENT" && "$TERM_PROGRAM" != "vscode" && "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]]
+}
+
 # --------------------------- Initialize p10k ---------------------------
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+if is_interactive && [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
@@ -37,9 +44,11 @@ zinit light-mode for \
     zdharma-continuum/zinit-annex-rust
 
 # --------------------------- Start p10k ---------------------------
-zinit ice depth"1"
-zinit light romkatv/powerlevel10k
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+if is_interactive; then
+  zinit ice depth"1"
+  zinit light romkatv/powerlevel10k
+  [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+fi
 
 # ---------------------- Initialize Mise ---------------------------
 zinit as="command" lucid from="gh-r" for \
@@ -56,17 +65,8 @@ zinit as="command" lucid from="gh-r" for \
 
 # ---------------------- Initialize Mise ---------------------------
 # Identify Homebrew install location
-{{ if eq .chezmoi.os "darwin" -}}
-  {{- if eq .chezmoi.arch "arm64" }}
+
 BREW_PREFIX_DEFAULT="/opt/homebrew"
-  {{- else }}
-BREW_PREFIX_DEFAULT="/usr/local"
-  {{- end }}
-{{- else if eq .chezmoi.os "linux" -}}
-BREW_PREFIX_DEFAULT="/home/linuxbrew/.linuxbrew"
-{{- else }}
-BREW_PREFIX_DEFAULT=""
-{{- end }}
 
 # Include homebrew if not on PATH
 if [[ -n "${BREW_PREFIX_DEFAULT:-}" && -x "${BREW_PREFIX_DEFAULT}/bin/brew" ]]; then

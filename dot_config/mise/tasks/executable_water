@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 #MISE description="Drink water reminder popup"
 
-if [[ -n "$TMUX" ]]; then
-	tmux display-popup -h 100% -w 100% -E "figlet 'DRINK WATER! RIGHT NOW...'; read"
+TMUX_SOCKET="/tmp/tmux-$(id -u)/default"
+
+if [[ -S "$TMUX_SOCKET" ]]; then
+	PANE=$(tmux -S "$TMUX_SOCKET" list-panes -a -F '#{pane_id}' 2>/dev/null | head -1)
+	if [[ -n "$PANE" ]]; then
+		tmux -S "$TMUX_SOCKET" run-shell -C -t "$PANE" "display-popup -h 100% -w 100% -E 'figlet DRINK WATER; read'"
+	fi
 fi

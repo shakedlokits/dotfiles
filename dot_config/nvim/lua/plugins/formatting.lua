@@ -23,4 +23,5 @@ return {
 			},
 		},
 	},
+	"LittleEndianRoot/mason-conform",
 }
