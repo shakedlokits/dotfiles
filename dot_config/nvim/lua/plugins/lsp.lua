@@ -70,36 +70,6 @@ return {
 		end,
 	},
 	{
-		"scalameta/nvim-metals",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"saghen/blink.cmp",
-		},
-		ft = { "scala", "sbt", "java" },
-		opts = function()
-			local metals_config = require("metals").bare_config()
-			metals_config.capabilities = require("blink.cmp").get_lsp_capabilities()
-			metals_config.settings = {
-				javaHome = "/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home",
-			}
-			metals_config.init_options = {
-				statusBarProvider = "on",
-			}
-			return metals_config
-		end,
-		config = function(self, metals_config)
-			vim.env.JAVA_HOME = "/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home"
-			local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-			vim.api.nvim_create_autocmd("FileType", {
-				pattern = self.ft,
-				callback = function()
-					require("metals").initialize_or_attach(metals_config)
-				end,
-				group = nvim_metals_group,
-			})
-		end,
-	},
-	{
 		"mosheavni/yaml-companion.nvim",
 		opts = {
 			schemas = {
